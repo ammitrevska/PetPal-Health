@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "429883198452",
+    "project_id": "petpalhealth",
+    "storage_bucket": "petpalhealth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:429883198452:android:c4976dbdf54ddace13c7a1",
+        "android_client_info": {
+          "package_name": "com.example.petpal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOgUGhqxsvgH5FahG2buiIHCwClrwiY_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

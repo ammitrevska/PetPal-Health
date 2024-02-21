@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petpal/models/pet.dart';
+import 'package:petpal/screens/pet_form.dart';
 
 class InitializePet extends StatefulWidget {
   const InitializePet({super.key});
@@ -49,18 +50,18 @@ class _InitializePet extends State<InitializePet> {
           ElevatedButton(
             onPressed: () async {
               // Navigate to the AddPetForm screen
-              // Pet? newPet = await Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => AddPetForm()),
-              // );
+           Pet? newPet = await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddPetForm()),
+                );
 
               // Check if a new pet was added and update the UI
-              // if (newPet != null) {
-              //   setState(() {
-              //     // Update your UI with the new pet information
-              //     petList.add(newPet);
-              //   });
-              // }
+             if (newPet != null) {
+                  setState(() {
+                    // Update your UI with the new pet information
+                    petList.add(newPet);
+                  });
+                }
             },
             child: const Text('Add a Pet'),
           ),
