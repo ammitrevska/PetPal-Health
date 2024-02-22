@@ -5,9 +5,9 @@ import 'models/pet.dart';
 
 class PetList extends StatelessWidget {
   final List<Pet> petList;
-  final VoidCallback onPetAdded;
+  final Function(Pet) onPetAdded; // Update the callback type
 
-  const PetList({required this.petList, required this.onPetAdded});
+  const PetList({super.key, required this.petList, required this.onPetAdded});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class PetList extends StatelessWidget {
 
                     if (result != null) {
                       // Notify the parent widget to update the pet list
-                      onPetAdded();
+                      onPetAdded(result);
                     }
                   },
                   child: const Text('Add a Pet'),
