@@ -14,6 +14,8 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>petpal</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Reason why we need access to your location</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
