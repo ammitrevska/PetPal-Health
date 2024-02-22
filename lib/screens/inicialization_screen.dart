@@ -1,21 +1,24 @@
+// screens/initialize_pet_screen.dart
 import 'package:flutter/material.dart';
 import 'package:petpal/enum/TaskCategory.dart';
 import 'package:petpal/models/pet.dart';
 import 'package:petpal/pet_list.dart';
+import 'package:petpal/screens/map_screen.dart';
 import 'package:petpal/task_command.dart';
 import 'package:petpal/task_list.dart';
-import 'package:petpal/screens/map_screen.dart'; // Import the MapScreen
+import 'package:petpal/widgets/nav_bar.dart';
 
 class InitializePet extends StatefulWidget {
   final List<Pet> petList;
   final List<String> taskList;
   final List<TaskCategory> categories;
+
   const InitializePet({
-    Key? key,
+    super.key,
     required this.petList,
     required this.taskList,
     required this.categories,
-  }) : super(key: key);
+  });
 
   @override
   State<InitializePet> createState() => _InitializePetState();

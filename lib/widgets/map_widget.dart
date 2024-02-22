@@ -14,20 +14,20 @@ class _MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple[200],
+        backgroundColor: const Color.fromRGBO(253, 197, 126, 1),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
-            color: Colors.indigo[800],
+            color: Colors.black,
           ),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        title: Text(
+        title: const Text(
           'Map',
           style: TextStyle(
-            color: Colors.indigo[800],
+            color: Colors.black,
           ),
         ),
       ),
@@ -35,20 +35,23 @@ class _MapWidgetState extends State<MapWidget> {
         children: [
           FlutterMap(
             options: const MapOptions(
-              initialCenter: LatLng(42.0041, 21.4134),
+              initialCenter: LatLng(42.0024847, 21.3714879),
               initialZoom: 15.0,
             ),
             children: [
               TileLayer(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               ),
-               MarkerLayer(
+              MarkerLayer(
                 markers: [
                   Marker(
                     point: const LatLng(42.0046584, 21.4092858),
                     width: 80,
-                    height: 80, 
-                    child: Icon(Icons.pin_drop, color: Colors.indigo[800],),
+                    height: 80,
+                    child: Icon(
+                      Icons.pin_drop,
+                      color: Colors.indigo[800],
+                    ),
                   )
                 ],
               )
