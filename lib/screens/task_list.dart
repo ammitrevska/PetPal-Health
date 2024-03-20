@@ -1,8 +1,9 @@
 // screens/task_list.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:petpal/enum/TaskCategory.dart';
-import 'models/task.dart';
-import 'task_command.dart';
+import '../models/task.dart';
+import '../task_command.dart';
 
 class TaskList extends StatelessWidget {
   final List<String> taskList;
@@ -17,29 +18,31 @@ class TaskList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 355,
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 43),
+          child: Text(
             taskList.isEmpty ? "No tasks to display" : "Tasks",
             style: const TextStyle(
                 color: Colors.black,
                 fontSize: 22,
-                fontFamily: 'Poppins',
+                fontFamily: 'Comic Sans MS',
                 fontWeight: FontWeight.w300),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 26),
+          child: TextButton(
             onPressed: () async {
               TextEditingController taskController = TextEditingController();
               TaskCategory? selectedCategory;
               TaskCategory defaultCategory = TaskCategory.getPillsCategory;
-
+              
               selectedCategory = await showDialog<TaskCategory>(
                 context: context,
                 builder: (BuildContext context) {
@@ -54,7 +57,7 @@ class TaskList extends StatelessWidget {
                               const InputDecoration(labelText: 'Task Name'),
                         ),
                         const SizedBox(height: 16),
-
+              
                         // Category
                         DropdownButton<TaskCategory>(
                           value: selectedCategory,
@@ -63,9 +66,8 @@ class TaskList extends StatelessWidget {
                               selectedCategory = newValue;
                             }
                           },
-                          items: categories
-                              .map<DropdownMenuItem<TaskCategory>>(
-                                  (TaskCategory category) {
+                          items: categories.map<DropdownMenuItem<TaskCategory>>(
+                              (TaskCategory category) {
                             return DropdownMenuItem<TaskCategory>(
                               value: category,
                               child: Text(category.getCategoryName()),
@@ -90,7 +92,7 @@ class TaskList extends StatelessWidget {
                               category: selectedCategory ?? defaultCategory,
                               frequency: 1,
                             );
-
+              
                             TaskCommand addTaskCommand = AddTaskCommand(
                               taskList: taskList,
                               task: newTask.name,
@@ -107,22 +109,39 @@ class TaskList extends StatelessWidget {
                 },
               );
             },
-            child: const Text("Add a Task"),
-          ),
-          for (String task in taskList)
-            ListTile(
-              title: Text(task),
-              trailing: IconButton(
-                icon: const Icon(Icons.remove),
-                onPressed: () {
-                  TaskCommand removeTaskCommand =
-                      RemoveTaskCommand(taskList: taskList, task: task);
-                  removeTaskCommand.execute();
-                },
-              ),
+            child: const Row(
+              children: [
+                SizedBox(width: 0,),
+                Icon(
+                  Icons.add,
+                  color: Color.fromRGBO(36, 45, 104, 1),
+                ),
+                Text(
+                  "Add tasks",
+                  style: TextStyle(
+                      color: Color.fromRGBO(36, 45, 104, 1),
+                      fontFamily: 'Poppins',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18),
+                ),
+              ],
             ),
-        ],
-      ),
+          ),
+        ),
+        for (String task in taskList)
+          ListTile(
+            title: Text(task),
+            trailing: IconButton(
+              icon: const Icon(Icons.remove),
+              onPressed: () {
+                TaskCommand removeTaskCommand =
+                    RemoveTaskCommand(taskList: taskList, task: task);
+                removeTaskCommand.execute();
+              },
+            ),
+          ),
+      ],
     );
   }
 }

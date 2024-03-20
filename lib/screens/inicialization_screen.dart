@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:petpal/enum/TaskCategory.dart';
 import 'package:petpal/models/pet.dart';
-import 'package:petpal/pet_list.dart';
+import 'package:petpal/screens/pet_list.dart';
 import 'package:petpal/screens/map_screen.dart';
 import 'package:petpal/task_command.dart';
-import 'package:petpal/task_list.dart';
+import 'package:petpal/screens/task_list.dart';
 import 'package:petpal/widgets/nav_bar.dart';
 
 class InitializePet extends StatefulWidget {
@@ -40,7 +40,19 @@ class _InitializePetState extends State<InitializePet> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 197, 126, 1),
-        title: const Text("Hello"),
+        title: const Padding(
+          padding: EdgeInsets.only(left: 27),
+          child: Text(
+            "Hello",
+            style: TextStyle(
+              fontFamily: 'Comic Sans Ms',
+              fontWeight: FontWeight.bold,
+              fontSize: 26
+            ),
+          ),
+        ),
+        //so there wont be a back arrow in the nav bar
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         decoration: const BoxDecoration(

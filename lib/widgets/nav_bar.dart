@@ -54,10 +54,10 @@
 import 'package:flutter/material.dart';
 import 'package:petpal/enum/TaskCategory.dart';
 import 'package:petpal/models/pet.dart';
-import 'package:petpal/pet_list.dart';
+import 'package:petpal/screens/pet_list.dart';
 import 'package:petpal/screens/inicialization_screen.dart';
 import 'package:petpal/task_command.dart';
-import 'package:petpal/task_list.dart';
+import 'package:petpal/screens/task_list.dart';
 import 'package:petpal/screens/calendar.dart';
 import 'package:petpal/screens/map_screen.dart';
 import 'package:petpal/screens/medic_screen.dart';

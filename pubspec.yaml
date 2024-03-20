@@ -93,6 +93,8 @@ flutter:
     - family: Comic Sans MS
       fonts:
         - asset: assets\fonts\comici.ttf
+        - asset: assets\fonts\COMICSANS.TTF
+        - asset: assets\fonts\COMIC.TTF
         
   #
   # For details regarding fonts from package dependencies,

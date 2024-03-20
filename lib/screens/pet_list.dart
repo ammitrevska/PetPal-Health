@@ -1,11 +1,12 @@
 // screens/pet_list.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:petpal/screens/pet_form.dart';
-import 'models/pet.dart';
+import '../models/pet.dart';
 
 class PetList extends StatelessWidget {
   final List<Pet> petList;
-  final Function(Pet) onPetAdded; // Update the callback type
+  final Function(Pet) onPetAdded;
 
   const PetList({super.key, required this.petList, required this.onPetAdded});
 
@@ -13,7 +14,7 @@ class PetList extends StatelessWidget {
   Widget build(BuildContext context) {
     return petList.isEmpty
         ? Container(
-            width: 355,
+            // width: 355,
             height: 140,
             clipBehavior: Clip.antiAlias,
             margin: const EdgeInsets.only(left: 16, right: 16),
@@ -44,11 +45,12 @@ class PetList extends StatelessWidget {
                       color: Color(0xFF242D68),
                       fontSize: 17,
                       fontFamily: 'Comic Sans MS',
-                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                ElevatedButton(
+                TextButton(
                   onPressed: () async {
                     dynamic result = await Navigator.push(
                       context,
@@ -62,7 +64,26 @@ class PetList extends StatelessWidget {
                       onPetAdded(result);
                     }
                   },
-                  child: const Text('Add a Pet'),
+                  child: const Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Icon(
+                          Icons.add,
+                          color: Color.fromRGBO(36, 45, 104, 1),
+                        ),
+                      ),
+                      Text(
+                        "Add a pet",
+                        style: TextStyle(
+                          color: Color.fromRGBO(36, 45, 104, 1),
+                          fontFamily: 'Poppins',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
