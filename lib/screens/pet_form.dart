@@ -24,131 +24,270 @@ class AddPetFormState extends State<AddPetForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add a pet"),
+        backgroundColor: const Color.fromRGBO(253, 197, 126, 1),
+        title: const Text("Add a pet",  
+              style: TextStyle(
+              fontFamily: 'Comic Sans Ms',
+              fontWeight: FontWeight.bold,
+              fontSize: 22
+            ),),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(253, 197, 126, 1),
+              Color.fromRGBO(249, 235, 162, 0.27),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(
+            children: [
+              //name
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Pet Name',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        style: BorderStyle.solid,
+                        width: 1.75),
+                  ),
+                ),
+                obscureText: true,
+              ),
 
-            //name
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(labelText: 'Pet Name'),
-            ),
+              //age
+              TextField(
+                controller: ageController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Age',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        style: BorderStyle.solid,
+                        width: 1.75),
+                  ),
+                ),
+              ),
 
-            //age
-            TextField(
-              controller: ageController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: "Age"),
-            ),
+              //weight
+              TextField(
+                controller: weightController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Weight',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        style: BorderStyle.solid,
+                        width: 1.75),
+                  ),
+                ),
+              ),
 
-            //weight
-            TextField(
-              controller: weightController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: "Weight"),
-            ),
-
-            //sex dropdown
-            DropdownButtonFormField<String>(
-              value: selectedSex,
-              onChanged: (String? value) {
-                setState(() {
-                  selectedSex = value!;
-                });
-              },
-              items: ["Male", "Female"]
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              decoration: const InputDecoration(labelText: "Sex"),
-            ),
-
-            //image - to be able to take a picture
-            const SizedBox(
-              height: 20,
-            ),
-
-            _selectedImage != null && _selectedImage.path.isNotEmpty
-                ? Image.file(_selectedImage)
-                : const Text("please select an image"),
-
-            ElevatedButton(
-                onPressed: () {
-                  _pickImageFromGallery();
+              //sex dropdown
+              DropdownButtonFormField<String>(
+                value: selectedSex,
+                onChanged: (String? value) {
+                  setState(() {
+                    selectedSex = value!;
+                  });
                 },
-                child: const Text("Select an image")),
+                items: ["Male", "Female"]
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Sex',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        style: BorderStyle.solid,
+                        width: 1.75),
+                  ),
+                ),
+              ),
 
-            ElevatedButton(
+              //image - to be able to take a picture
+              const SizedBox(
+                height: 20,
+              ),
+
+              _selectedImage.path.isNotEmpty
+                  ? Image.file(_selectedImage)
+                  : const Text(
+                      "Please select an image",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        color: Colors.black,
+                      ),
+                    ),
+
+              ElevatedButton(
+                  onPressed: () {
+                    _pickImageFromGallery();
+                  },
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                      Colors.white,
+                    ),
+                  ),
+                  child: const Text(
+                    "Select an image",
+                    style: TextStyle(
+                      color: Color(0xFF242D68),
+                    ),
+                  )),
+
+              ElevatedButton(
                 onPressed: () {
                   _pickImageFromCamera();
                 },
-                child: const Text("Open camera")),
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                    Colors.white,
+                  ),
+                ),
+                child: const Text(
+                  "Open camera",
+                  style: TextStyle(
+                    color: Color(0xFF242D68),
+                  ),
+                ),
+              ),
 
-            //type of pet
-            DropdownButtonFormField<String>(
-              value: selectedType,
-              onChanged: (String? value) {
-                setState(() {
-                  selectedType = value!;
-                });
-              },
-              items: ['Dog', 'Cat', 'Rabbit']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              decoration: const InputDecoration(labelText: 'Type'),
-            ),
-
-            const SizedBox(
-              height: 20,
-            ),
-
-            //submit
-            ElevatedButton(
-              onPressed: () {
-                String petName = nameController.text;
-                int petAge = int.tryParse(ageController.text) ?? 0;
-                double petWeight =
-                    double.tryParse(weightController.text) ?? 0.0;
-
-                if (_selectedImage != null) {
-                  PetManager.instance.addPet(
-                    name: petName,
-                    sex: selectedSex,
-                    age: petAge,
-                    weight: petWeight,
-                    image: _selectedImage!,
-                    type: selectedType,
-                  );
-                  nameController.clear();
-                  ageController.clear();
-                  weightController.clear();
+              //type of pet
+              DropdownButtonFormField<String>(
+                value: selectedType,
+                onChanged: (String? value) {
                   setState(() {
-                    _selectedImage = File('');
+                    selectedType = value!;
                   });
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Please select an image"),
-                    ),
+                },
+                items: ['Dog', 'Cat', 'Rabbit']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
                   );
-                }
-              },
-              child: const Text("Submit"),
-            )
-          ],
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Sex',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.black,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        style: BorderStyle.solid,
+                        width: 1.75),
+                  ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 20,
+              ),
+
+              //submit
+              ElevatedButton(
+                onPressed: () {
+                  String petName = nameController.text;
+                  int petAge = int.tryParse(ageController.text) ?? 0;
+                  double petWeight =
+                      double.tryParse(weightController.text) ?? 0.0;
+
+                  if (_selectedImage != null) {
+                    PetManager.instance.addPet(
+                      name: petName,
+                      sex: selectedSex,
+                      age: petAge,
+                      weight: petWeight,
+                      image: _selectedImage!,
+                      type: selectedType,
+                    );
+                    nameController.clear();
+                    ageController.clear();
+                    weightController.clear();
+                    setState(() {
+                      _selectedImage = File('');
+                    });
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Please select an image"),
+                      ),
+                    );
+                  }
+                },
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                    Colors.white,
+                  ),
+                ),
+                child: const Text("Submit", style: TextStyle(
+                  color:Color(0xFF242D68),
+                ),),
+              )
+            ],
+          ),
         ),
       ),
     );

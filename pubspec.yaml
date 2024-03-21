@@ -90,6 +90,7 @@ flutter:
         - asset: assets\fonts\Poppins-ExtraLight.ttf
         - asset: assets\fonts\Poppins-Light.ttf
         - asset: assets\fonts\Poppins-SemiBold.ttf
+        - asset: assets\fonts\Poppins-Regular.ttf
     - family: Comic Sans MS
       fonts:
         - asset: assets\fonts\comici.ttf
