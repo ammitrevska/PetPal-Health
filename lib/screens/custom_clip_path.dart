@@ -70,7 +70,7 @@ class CustomClipPathWidget extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const InitializePet(petList: [], taskList: [], categories: [],))
+                        builder: (context) => const InitializePet(taskList: [], categories: [],))
                     );
                   },
                   style: ElevatedButton.styleFrom(

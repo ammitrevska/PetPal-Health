@@ -2,30 +2,33 @@
 import 'package:flutter/material.dart';
 import 'package:petpal/enum/TaskCategory.dart';
 import 'package:petpal/models/pet.dart';
+import 'package:petpal/pet_manager.dart';
 import 'package:petpal/screens/pet_list.dart';
 import 'package:petpal/screens/map_screen.dart';
 import 'package:petpal/task_command.dart';
 import 'package:petpal/screens/task_list.dart';
 import 'package:petpal/widgets/nav_bar.dart';
+import 'package:petpal/widgets/petDetails.dart';
 
 class InitializePet extends StatefulWidget {
-  final List<Pet> petList;
   final List<String> taskList;
   final List<TaskCategory> categories;
 
   const InitializePet({
     super.key,
-    required this.petList,
     required this.taskList,
     required this.categories,
   });
+  
+  get petList => null;
 
   @override
   State<InitializePet> createState() => _InitializePetState();
 }
 
 class _InitializePetState extends State<InitializePet> {
-  List<Pet> petList = [];
+  Pet? _addedPet;
+
   List<String> taskList = [];
   List<TaskCommand> executedCommands = [];
   List<TaskCategory> categories = [
@@ -34,6 +37,22 @@ class _InitializePetState extends State<InitializePet> {
     TaskCategory.getSnacksCategory,
     TaskCategory.getWaterCategory,
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    PetManager.instance.onPetAdded.listen((newPet) { 
+      setState(() {
+        _addedPet = newPet;
+      });
+    });
+  }
+
+  // @override
+  // void dispose() {
+  //   PetManager.instance.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +64,9 @@ class _InitializePetState extends State<InitializePet> {
           child: Text(
             "Hello",
             style: TextStyle(
-              fontFamily: 'Comic Sans Ms',
-              fontWeight: FontWeight.bold,
-              fontSize: 26
-            ),
+                fontFamily: 'Comic Sans Ms',
+                fontWeight: FontWeight.bold,
+                fontSize: 26),
           ),
         ),
         //so there wont be a back arrow in the nav bar
@@ -69,14 +87,18 @@ class _InitializePetState extends State<InitializePet> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 30),
-            PetList(
-              petList: petList,
-              onPetAdded: (newPet) {
-                setState(() {
-                  petList.add(newPet);
-                });
-              },
-            ),
+            if (_addedPet == null) ...[
+              PetList(
+                petList: PetManager.instance.petList,
+                onPetAdded: (newPet) {
+                  setState(() {
+                    _addedPet = newPet;
+                  });
+                },
+              ),
+            ] else ...[
+              PetDetails(pet: _addedPet!),
+            ],
             const SizedBox(height: 20),
             TaskList(
               taskList: taskList,
@@ -94,10 +116,9 @@ class _InitializePetState extends State<InitializePet> {
         backgroundColor: const Color.fromRGBO(249, 235, 162, 0.27),
         selectedItemColor: const Color.fromRGBO(253, 197, 126, 1),
         unselectedItemColor: Colors.grey,
-        currentIndex: 0, // Assuming you want the first tab selected initially
+        currentIndex: 0,
         onTap: (index) {
           if (index == 2) {
-            // If the Map tab is selected (index 2), navigate to MapScreen
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const MapScreen()),

@@ -1,7 +1,7 @@
 abstract class TaskCategory {
   String getCategoryName();
   String getStickerImage();
-  String getUniqueKey(); // Add this method
+  String getUniqueKey();
 
    static final TaskCategory pillsCategory = PillsCategory();
   static final TaskCategory foodCategory = FoodCategory();
@@ -62,7 +62,7 @@ class FoodCategory implements TaskCategory {
   }
     @override
   String getUniqueKey() {
-    return 'Food'; // Provide a unique key
+    return 'Food'; 
   }
 
 
@@ -82,7 +82,7 @@ class SnacksCategory implements TaskCategory {
 
     @override
   String getUniqueKey() {
-    return 'Snack'; // Provide a unique key
+    return 'Snack'; 
   }
 
 
@@ -102,7 +102,7 @@ class WaterCategory implements TaskCategory {
 
     @override
   String getUniqueKey() {
-    return 'Water'; // Provide a unique key
+    return 'Water'; 
   }
 
   WaterCategory();

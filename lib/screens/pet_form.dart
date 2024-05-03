@@ -69,7 +69,6 @@ class AddPetFormState extends State<AddPetForm> {
                         width: 1.75),
                   ),
                 ),
-                obscureText: true,
               ),
 
               //age
@@ -222,7 +221,7 @@ class AddPetFormState extends State<AddPetForm> {
                   );
                 }).toList(),
                 decoration: const InputDecoration(
-                  labelText: 'Sex',
+                  labelText: 'Type of Pet',
                   labelStyle: TextStyle(
                     fontFamily: 'Poppins',
                     color: Colors.black,
@@ -251,8 +250,7 @@ class AddPetFormState extends State<AddPetForm> {
                 onPressed: () {
                   String petName = nameController.text;
                   int petAge = int.tryParse(ageController.text) ?? 0;
-                  double petWeight =
-                      double.tryParse(weightController.text) ?? 0.0;
+                  double petWeight = double.tryParse(weightController.text) ?? 0.0;
 
                   if (_selectedImage != null) {
                     PetManager.instance.addPet(
@@ -263,12 +261,16 @@ class AddPetFormState extends State<AddPetForm> {
                       image: _selectedImage!,
                       type: selectedType,
                     );
+
+                    //clear the fields
                     nameController.clear();
                     ageController.clear();
                     weightController.clear();
                     setState(() {
                       _selectedImage = File('');
                     });
+
+                    Navigator.of(context).pop();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -277,11 +279,13 @@ class AddPetFormState extends State<AddPetForm> {
                     );
                   }
                 },
+
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
                     Colors.white,
                   ),
                 ),
+                
                 child: const Text("Submit", style: TextStyle(
                   color:Color(0xFF242D68),
                 ),),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
 import 'package:petpal/models/pet.dart';
@@ -7,15 +8,16 @@ class PetManager {
   // Singleton instance
   static final PetManager _instance = PetManager._();
 
-  // Access singleton instance
   static PetManager get instance => _instance;
+
+  final _petAddedController = StreamController<Pet>.broadcast();
+  Stream<Pet> get onPetAdded => _petAddedController.stream;
 
   List<Pet> _petList = [];
   List<Pet> get petList => _petList;
 
   final DatabaseService databaseService = DatabaseService();
 
-  // Constructor
   PetManager._() {
     _initializePetList();
   }
@@ -53,10 +55,19 @@ class PetManager {
 
       _petList.add(newPet);
       databaseService.addPetData(newPet);
+
+      //notfy the ui
+      if(onPetAdded != null){
+        _petAddedController.add(newPet);
+      }
     }
     else{
       print("Image URl is empty");
     }
+  }
+
+    void dispose() {
+    _petAddedController.close();
   }
 
   // Delete pet

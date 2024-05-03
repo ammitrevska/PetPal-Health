@@ -10,10 +10,9 @@ class DatabaseService {
   final CollectionReference petCollection =
       FirebaseFirestore.instance.collection('pets');
 
-  // Create (add) a new pet
+  // Create or add new pet
   Future<void> addPetData(Pet pet) async {
     try {
-      // Use .add() to auto-generate a document ID
       await petCollection.add({
         'name': pet.name,
         'sex': pet.sex,
@@ -45,7 +44,6 @@ class DatabaseService {
           image: data['image'] ?? '',
           type: data['type'] ?? '',
         );
-
         petList.add(pet);
       }
       return petList;
@@ -88,18 +86,14 @@ Future<String> uploadImageToFirebase(File image) async {
         FirebaseStorage.instance.ref().child('images/$imageName.jpg');
     UploadTask uploadTask = storageReference.putFile(image);
 
-    // Attach a listener to the UploadTask
     uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
       print('Progress: ${(snapshot.bytesTransferred / snapshot.totalBytes) * 100}%');
     }, onError: (Object e) {
       print('Error during upload task: $e');
-      // Handle the error, for example, by returning a suitable error message
     });
 
-    // Wait for the upload task to complete
     await uploadTask;
 
-    // Retrieve the download URL
     String imageUrl = await storageReference.getDownloadURL();
 
     print('Image uploaded successfully. URL: $imageUrl');
@@ -107,7 +101,6 @@ Future<String> uploadImageToFirebase(File image) async {
     return imageUrl;
   } catch (e) {
     print('Error uploading image to Firebase: $e');
-    // Return an empty string or a suitable error message
     return 'Error during image upload';
   }
 }

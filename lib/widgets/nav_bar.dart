@@ -82,7 +82,7 @@ class _NavBarState extends State<NavBar> {
   ];
 
   final List<Widget> _pages = [
-    const InitializePet(petList: [], taskList: [], categories: []),
+    const InitializePet(taskList: [], categories: []),
     const CalendarPage(),
     const MapScreen(),
     const MedicScreen(),
